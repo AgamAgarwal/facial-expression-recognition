@@ -1,0 +1,6 @@
+#OS X database
+.DS_Store
+
+#Never ignore .gitignore
+!.gitignore
+
