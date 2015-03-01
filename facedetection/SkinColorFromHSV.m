@@ -1,7 +1,9 @@
 function [ bounding_boxes ] = SkinColorFromHSV( image )
 %SKINCOLORFROMHSV Function returns a matrix of bounding boxes for skin
-%   color regions of size no_of_boxes x 4 where each box is represented 
-%   as    [x, y, width, height]
+%   color regions of size no_of_boxes x 4.
+%
+%	@param bounding_boxes:  [x, y, width, height]
+%	@param image: Path to image file or MATLAB image object
 
     I = image;
     if ischar(I)
