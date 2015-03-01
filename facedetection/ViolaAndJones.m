@@ -6,7 +6,7 @@
 %	
 %	@return boxes: List of boxes detected as N x 4 vectors : [x y width height]
 %
-function boxes = ViolaAndJones(image)
+function [boxes I] = ViolaAndJones(image, annotated)
 	I = image;
 	if ischar(I)
 		if exist(I, 'file') ~= 2
@@ -17,4 +17,10 @@ function boxes = ViolaAndJones(image)
 
 	faceDetector = vision.CascadeObjectDetector();
 	boxes = step(faceDetector, I);
+
+	if annotated == true,
+		shapeInserter = vision.ShapeInserter('BorderColor','Custom', 'CustomBorderColor', uint8([255 255 0]));
+		rectangle = int32(boxes);
+		I = step(shapeInserter, I, rectangle);
+	end
 end
