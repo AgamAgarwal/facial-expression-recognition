@@ -13,6 +13,7 @@ function [ bounding_boxes ] = SkinColorFromHSV( image )
         I = imread(I);
     end
     [~,skin_region]=face(I);
+    b = skin_region;
     CC = bwconncomp(skin_region);
     no_of_objects = CC.NumObjects;
     bounding_boxes = zeros(no_of_objects,4);
