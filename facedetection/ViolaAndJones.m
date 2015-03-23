@@ -28,7 +28,8 @@ function [maxbox I] = ViolaAndJones(image, annotated)
 	maxbox = boxes(index, :);
 
 	if annotated == true,
-		shapeInserter = vision.ShapeInserter('BorderColor','Custom', 'CustomBorderColor', uint8([255 255 0]));
+		%shapeInserter = vision.ShapeInserter('BorderColor','Custom', 'CustomBorderColor', uint8([255 255 0]));
+		shapeInserter = vision.ShapeInserter;
 		rectangle = int32(maxbox);
 		I = step(shapeInserter, I, rectangle);
 	end
