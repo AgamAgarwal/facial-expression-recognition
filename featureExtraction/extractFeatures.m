@@ -3,14 +3,10 @@ function [x_displacement, y_displacement,angle,velocity] = extractFeatures( face
 %   @param  face1:  Fist Face
 %           face2:  Second Face
 %           points: Feature points of first face
-%           window:Sampling each windowTH frame.
+%           window: Sampling each windowTH frame.
 %           fps:    Video fps
     if sum(size(face1) ~= size(face2)) ~= 0
-        if(size(face1,1)*size(face1,2) > size(face2,1)*size(face2,2))
-            face1 = imresize(face1,[size(face2,1) size(face2,2)]);
-        else
-            face2 = imresize(face2,[size(face1,1) size(face1,2)]);
-        end        
+        face2 = imresize(face2,[size(face1,1) size(face1,2)]);
     end
 
     [x_diff, y_diff] = HS(face1, face2, 1, 100, [],[], 0,[]);

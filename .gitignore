@@ -1,6 +1,10 @@
 #OS X database
 .DS_Store
 
+*.mat
+Thumbs.db
+
 #Never ignore .gitignore
 !.gitignore
+
 
