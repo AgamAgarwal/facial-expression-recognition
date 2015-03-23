@@ -6,7 +6,7 @@
 %	
 %	@return boxes: List of boxes detected as N x 4 vectors : [x y width height]
 %
-function [boxes I] = ViolaAndJones(image, annotated)
+function [maxbox I] = ViolaAndJones(image, annotated)
 	I = image;
 	if ischar(I)
 		if exist(I, 'file') ~= 2
@@ -17,10 +17,19 @@ function [boxes I] = ViolaAndJones(image, annotated)
 
 	faceDetector = vision.CascadeObjectDetector();
 	boxes = step(faceDetector, I);
+	if size(boxes, 1) == 0,
+		maxbox = null;
+		return;
+	end
+
+	% return only the largest rectangle
+	boxareas = boxes(:,3) .* boxes(:, 4);
+	[val index] = max(boxareas);
+	maxbox = boxes(index, :);
 
 	if annotated == true,
 		shapeInserter = vision.ShapeInserter('BorderColor','Custom', 'CustomBorderColor', uint8([255 255 0]));
-		rectangle = int32(boxes);
+		rectangle = int32(maxbox);
 		I = step(shapeInserter, I, rectangle);
 	end
 end
