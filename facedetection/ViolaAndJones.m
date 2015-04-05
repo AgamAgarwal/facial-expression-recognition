@@ -18,7 +18,7 @@ function [maxbox I] = ViolaAndJones(image, annotated)
 	faceDetector = vision.CascadeObjectDetector();
 	boxes = step(faceDetector, I);
 	if size(boxes, 1) == 0,
-		maxbox = null;
+		maxbox = [];
 		return;
 	end
 
