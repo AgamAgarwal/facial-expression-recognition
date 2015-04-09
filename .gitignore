@@ -3,6 +3,7 @@
 
 *.mat
 Thumbs.db
+desktop.ini
 
 #Never ignore .gitignore
 !.gitignore

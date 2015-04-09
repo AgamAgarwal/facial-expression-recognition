@@ -13,24 +13,26 @@ function [points,face,status] = goodPoints(I)
         I = rgb2gray(I);
     end
     % Detect Face
-    temp_box = ViolaAndJones(I,false);
-    % Currently we're only working with one face
+    temp_box = ViolaAndJones(I, false);
+    
+    
     if (size(temp_box,1) ~= 0)
-        face_box = temp_box(1,:);
+        face_box = temp_box;
     else
         face = 0;
         status = 0;
         return;
     end
     face = I(face_box(2):face_box(2)+face_box(4), face_box(1):face_box(1)+face_box(3));
-    
-    
+    %Face Size is always 128x128
+    face = imresize(face,[128 128]);
     
     %Detect Nose
-    noseDetector = vision.CascadeObjectDetector('Nose');
-    nose_box = step(noseDetector,face);
+    %noseDetector = vision.CascadeObjectDetector('Nose');
+    %nose_box = step(noseDetector,face);
+    nose_box = getFaceFeature(face,'Nose',false);
     if (size(nose_box,1) == 0)
-        disp('nose khali');
+        disp('nose not detected');
         status = 0;
         return;
     else
@@ -62,11 +64,12 @@ function [points,face,status] = goodPoints(I)
     end
     
     %Detect Mouth
-    mouthDetector = vision.CascadeObjectDetector('Mouth');
-    mouth_box = step(mouthDetector,face);
+    %mouthDetector = vision.CascadeObjectDetector('Mouth');
+    %mouth_box = step(mouthDetector,face);
+    mouth_box = getFaceFeature(face,'Mouth',false);
     
     if (size(mouth_box,1) == 0)
-        disp('nose khali');
+        disp('nose not detected');
         status = 0;
         return;
     else
@@ -98,10 +101,12 @@ function [points,face,status] = goodPoints(I)
     end
     
     %Detect Left Eye
-	lefteyeDetector = vision.CascadeObjectDetector('LeftEye');
-    lefteye_box = step(lefteyeDetector,face);
+	%lefteyeDetector = vision.CascadeObjectDetector('LeftEye');
+    %lefteye_box = step(lefteyeDetector,face);
+    lefteye_box = getFaceFeature(face,'LeftEye',false);
+    
     if (size(lefteye_box,1) == 0)
-        disp('lefteye khali');
+        disp('lefteye not detected');
         status = 0;
         return;
     else
@@ -134,10 +139,12 @@ function [points,face,status] = goodPoints(I)
     end
     
     %Detect Right Eye
-	righteyeDetector = vision.CascadeObjectDetector('RightEye');
-    righteye_box = step(righteyeDetector,face);
+	%righteyeDetector = vision.CascadeObjectDetector('RightEye');
+    %righteye_box = step(righteyeDetector,face);
+    righteye_box = getFaceFeature(face,'RightEye',false);
+    
     if (size(righteye_box,1) == 0)
-        disp('righteye khali');
+        disp('righteye not detected');
         status = 0;
         return;
     else
