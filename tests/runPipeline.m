@@ -10,7 +10,7 @@ train_labels = good_labels(setdiff(t2,t1)');
 train_data = good_data(setdiff(t2,t1)',:);
 models = trainClassifier(train_data,train_labels);
 pred_labels = classify(test_data,models,7);
-sum(pred_labels ~= test_labels)
+100*sum(pred_labels == test_labels)/size(test_labels,1)
 
 pred_labels = classify(train_data,models,7);
 sum(pred_labels ~= train_labels)
