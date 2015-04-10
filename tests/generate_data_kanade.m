@@ -8,10 +8,11 @@
 % 7=surprise
 
 load('cohn-kanade-faces.mat');
-data = zeros(327,64);
+train_size=size(Final_images, 1);
+data = zeros(train_size,64);
 j = [];
 
-for i=1:327
+for i=1:train_size
     disp(i)
     [points, face1,status] = goodPoints(OG_images{i,1});
     if (status ==0)

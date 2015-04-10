@@ -21,10 +21,10 @@ function [x_displacement, y_displacement,angle,velocity] = extractFeatures( face
     angle(y_zero) = 0;    
     velocity = sqrt(y_displacement.^2 + x_displacement.^2)/(window/fps);
     
-    imshow(face1); hold on; 
-    plot(points(:,1),points(:,2),'ro');
-    plot(int32(points(:,1))+int32(x_displacement),int32(points(:,2))+int32(y_displacement),'bo');
-    arrayfun(@(x,y,dx,dy) plot([x x+int32(dx)],[y y+int32(dy)]),int32(points(:,1)), int32(points(:,2)), x_displacement, y_displacement);
-    pause;
+    %imshow(face1); hold on; 
+    %plot(points(:,1),points(:,2),'ro');
+    %plot(int32(points(:,1))+int32(x_displacement),int32(points(:,2))+int32(y_displacement),'bo');
+    %arrayfun(@(x,y,dx,dy) plot([x x+int32(dx)],[y y+int32(dy)]),int32(points(:,1)), int32(points(:,2)), x_displacement, y_displacement);
+	%pause;
 end
 
