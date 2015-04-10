@@ -26,6 +26,9 @@ function [points,face,status] = goodPoints(I)
     face = I(face_box(2):face_box(2)+face_box(4), face_box(1):face_box(1)+face_box(3));
     %Face Size is always 128x128
     face = imresize(face,[128 128]);
+	
+	%Sharpen face
+	face = imsharpen(face);
     
     %Detect Nose
     %noseDetector = vision.CascadeObjectDetector('Nose');
